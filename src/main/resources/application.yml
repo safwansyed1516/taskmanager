@@ -1,0 +1,44 @@
+server:
+  port: 8082
+  servlet:
+    context-path: /task-manager
+spring:
+  application:
+    name: user-service
+  datasource:
+    username: root
+    password: root
+    url: jdbc:mysql://localhost:3306/task-manager?createDatabaseIfNotExist=true 
+    driver-class-name: com.mysql.jdbc.Driver
+    tomcat:
+      max-active: 100
+      max-wait: 5000
+      min-idle: 10
+      max-idle: 15
+    hikari:
+      connection-timeout: 15000
+      maximum-pool-size: 5
+      minimum-idle: 10
+  jpa:
+    hibernate:
+      ddl-auto: none
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+        generate_statistics: false
+        id:
+          new_generator_mappings: false
+    show-sql: true
+application:
+  token:
+    expiry: 48
+  password:
+    expiry: 100  
+  tokenValidity: 90000
+  signingKey: devglan123r
+  adminRoleId: 1
+  adminRoleName: ADMIN
+  tokenPrefix: Bearer
+  headerString: Authorization          
