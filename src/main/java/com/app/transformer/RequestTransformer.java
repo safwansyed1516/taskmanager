@@ -2,6 +2,7 @@ package com.app.transformer;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import com.app.dto.TaskDto;
@@ -20,6 +21,9 @@ public class RequestTransformer {
 	@Autowired
 	TaskService taskService;
 
+	@Autowired
+	BCryptPasswordEncoder bCryptPasswordEncoder;
+
 	public User transformUserEntity(UserDto userDto) {
 		User user = null;
 		if (userDto.getUserId() == null) {
@@ -28,6 +32,7 @@ public class RequestTransformer {
 			user = userInformationService.getUserByUserId(userDto.getUserId());
 		}
 		BeanUtils.copyProperties(userDto, user);
+		user.setPassword(bCryptPasswordEncoder.encode(userDto.getPassword()));
 		user.setIsDeleted(Boolean.FALSE);
 		return user;
 	}

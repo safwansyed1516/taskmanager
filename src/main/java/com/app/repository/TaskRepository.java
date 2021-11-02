@@ -22,4 +22,11 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
 	@Query("UPDATE Task t SET t.isDeleted=true")
 	int deleteTask(Long taskId);
 
+	List<Task> findByIsComplete(Boolean false1, PageRequest pageRequest);
+
+	@Modifying
+	@Transactional
+	@Query("UPDATE Task t SET t.isComplete=:status WHERE t.taskId:taskId")
+	int updateStatus(Long taskId, Boolean status);
+
 }

@@ -21,4 +21,8 @@ public interface TaskService {
 
 	TaskDto getTask(Long taskId) throws TaskManagerServiceException;
 
+	List<TaskDto> getAllIncompleteTask(int pageNo, int pageSize) throws TaskManagerServiceException;
+
+	String markTask(Long taskId, Boolean status) throws TaskManagerServiceException;
+
 }

@@ -26,7 +26,10 @@ public enum ErrorCodes implements IErrorCode {
 	FAILED_TO_GET_TASK(1014, HttpStatus.BAD_REQUEST, "Failed to get task."),
 	FAILED_TO_SAVE_TASK(1015, HttpStatus.BAD_REQUEST, "Failed to save task."),
 	FAILED_TO_UPDATE_TASK(1016, HttpStatus.BAD_REQUEST, "Failed to update task."),
-	FAILED_TO_DELETE_TASK(1017, HttpStatus.BAD_REQUEST, "Failed to delete task."),;
+	FAILED_TO_DELETE_TASK(1017, HttpStatus.BAD_REQUEST, "Failed to delete task."),
+
+	STATUS_UPDATED(1018, HttpStatus.OK, "Status updated sucessfully."),
+	FAILED_TO_UPDATE_STATUS(1019, HttpStatus.BAD_REQUEST, "Failed to update status."),;
 
 	/** Begin of the error codes range. */
 	public static final int ERROR_CODE_RANGE_BASE = 1000;

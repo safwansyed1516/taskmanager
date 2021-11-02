@@ -42,7 +42,7 @@ public class Task implements Serializable {
 	@Column(name = "is_complete", columnDefinition = "TinyInt(1) default ' '")
 	private Boolean isComplete;
 
-	@Column(name = "is_complete", columnDefinition = "TinyInt(1) default ' '")
+	@Column(name = "is_deleted", columnDefinition = "TinyInt(1) default ' '")
 	private Boolean isDeleted;
 
 	@Column(name = "category_id")

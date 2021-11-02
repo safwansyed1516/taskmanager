@@ -99,4 +99,40 @@ public class TaskServiceImpl implements TaskService {
 
 	}
 
+	@Override
+	public List<TaskDto> getAllIncompleteTask(int pageNo, int pageSize) throws TaskManagerServiceException {
+
+		try {
+			PageRequest pageRequest = PageRequest.of(pageNo, pageSize, Sort.by("taskId").descending());
+			List<TaskDto> taskDtoList = new ArrayList<>();
+			List<Task> savedTask = taskRepository.findByIsComplete(Boolean.FALSE, pageRequest);
+			BeanUtils.copyProperties(savedTask, taskDtoList);
+			return taskDtoList;
+
+		} catch (final Exception ex) {
+			log.error("Exception at get all task : ", ex);
+			throw ErrorCodes.FAILED_TO_GET_TASK.createTaskManagerServiceException();
+		}
+
+	}
+
+	@Override
+	public String markTask(Long taskId, Boolean status) throws TaskManagerServiceException {
+
+		try {
+			TaskDto taskDto = new TaskDto();
+			int updateStatus = taskRepository.updateStatus(taskId, status);
+			if (updateStatus > 0) {
+				return ErrorCodes.STATUS_UPDATED.getMessage();
+			} else {
+				return ErrorCodes.FAILED_TO_UPDATE_STATUS.getMessage();
+			}
+
+		} catch (final Exception ex) {
+			log.error("Exception at mark task : ", ex);
+			throw ErrorCodes.FAILED_TO_UPDATE_STATUS.createTaskManagerServiceException();
+		}
+
+	}
+
 }

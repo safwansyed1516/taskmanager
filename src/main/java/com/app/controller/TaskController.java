@@ -102,4 +102,30 @@ public class TaskController {
 		return new ResponseEntity<>(userResponse, HttpStatus.OK);
 
 	}
+
+	@ApiOperation("Endpoint for getting all incomplete task")
+	@GetMapping("/get-all-incomplete/{pageNo}/{pageSize}")
+	public ResponseEntity<TaskManagerResponse<List<TaskDto>>> getAllIncompleteTask(@PathVariable int pageNo,
+			@PathVariable int pageSize) throws TaskManagerServiceException {
+		TaskManagerResponse<List<TaskDto>> userResponse = new TaskManagerResponse<>();
+		List<TaskDto> taskList = taskService.getAllIncompleteTask(pageNo, pageSize);
+		userResponse.setHttpStatus(HttpStatus.OK);
+		userResponse.setMessage(ErrorCodes.TASK_FETCHED.getMessage());
+		userResponse.setData(taskList);
+		return new ResponseEntity<>(userResponse, HttpStatus.OK);
+
+	}
+
+	@ApiOperation("Endpoint for marking task complete/incomplete")
+	@GetMapping("/mark/{taskId}/{status}")
+	public ResponseEntity<TaskManagerResponse<String>> markTask(@PathVariable Long taskId, @PathVariable Boolean status)
+			throws TaskManagerServiceException {
+		TaskManagerResponse<String> userResponse = new TaskManagerResponse<>();
+		String taskMarked = taskService.markTask(taskId, status);
+		userResponse.setHttpStatus(HttpStatus.OK);
+		userResponse.setMessage(ErrorCodes.TASK_FETCHED.getMessage());
+		userResponse.setData(taskMarked);
+		return new ResponseEntity<>(userResponse, HttpStatus.OK);
+
+	}
 }

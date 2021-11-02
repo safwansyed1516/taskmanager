@@ -17,7 +17,6 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Configuration
@@ -57,11 +56,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.cors().and().csrf().disable().authorizeRequests()
-				.antMatchers("/logout", "/login", "/registration", "/swagger-ui.html", "/*", "/user/*",
-						"/driverapp/validateDriver*","/driverapp/login*","/driverapp/otp*","/route/displayRoute/*","/driverapp/uploadMapImage*")
-				.permitAll().anyRequest().authenticated().and().exceptionHandling()
-				.authenticationEntryPoint(unauthorizedHandler).and().sessionManagement()
-				.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+				.antMatchers("/logout", "/login", "/register/*", "/swagger-ui.html").permitAll().anyRequest()
+				.authenticated().and().exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
+				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 		http.addFilterBefore(this.authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);
 	}
 
@@ -69,13 +66,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	public BCryptPasswordEncoder encoder() {
 		return new BCryptPasswordEncoder();
 	}
-	
+
 	@Bean
 	public InternalResourceViewResolver jspViewResolver() {
-	    InternalResourceViewResolver resolver= new InternalResourceViewResolver();
-	    resolver.setPrefix("/WEB-INF/Pages/");
-	    resolver.setSuffix(".jsp");
-	    return resolver;
-	} 
+		InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+		resolver.setPrefix("/WEB-INF/Pages/");
+		resolver.setSuffix(".jsp");
+		return resolver;
+	}
 
 }
