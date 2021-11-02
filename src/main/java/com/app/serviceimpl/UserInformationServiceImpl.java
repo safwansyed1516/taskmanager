@@ -2,6 +2,7 @@ package com.app.serviceimpl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +38,7 @@ public class UserInformationServiceImpl implements UserInformationService {
 	}
 
 	@Override
-	public UserDto saveOrUpdateUser(User userEntity, boolean isAdd) throws TaskManagerServiceException {
+	public UserDto saveOrUpdateUser(User userEntity) throws TaskManagerServiceException {
 		try {
 			User savedUserEntity = loginRepository.save(userEntity);
 			UserDto userDto = new UserDto();
@@ -78,6 +79,15 @@ public class UserInformationServiceImpl implements UserInformationService {
 			log.error("Exception at Get All User", ex);
 		}
 		return new ArrayList<>();
+	}
+
+	@Override
+	public User getUserByUserId(Long userId) {
+		Optional<User> user = loginRepository.findById(userId);
+		if (user.isPresent()) {
+			return user.get();
+		}
+		return new User();
 	}
 
 }

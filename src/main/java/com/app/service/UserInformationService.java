@@ -13,10 +13,12 @@ public interface UserInformationService {
 
 	public UserDto getUserByMailId(String email) throws TaskManagerServiceException;
 
-	public UserDto saveOrUpdateUser(User userEntity, boolean isAdd) throws TaskManagerServiceException;
+	public UserDto saveOrUpdateUser(User userEntity) throws TaskManagerServiceException;
 
 	public String deleteUser(Long userId) throws TaskManagerServiceException;
 
 	public List<UserDto> getAllUsers() throws TaskManagerServiceException;
+
+	public User getUserByUserId(Long userId);
 
 }

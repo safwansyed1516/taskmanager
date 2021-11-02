@@ -9,10 +9,11 @@ public enum ErrorCodes implements IErrorCode {
 	UNAUTHORIZED(1001, HttpStatus.UNAUTHORIZED, "Incorrect Username/Password."),
 	FAILED_TO_GET_USER(1002, HttpStatus.BAD_REQUEST, "Failed to get user."),
 	FAILED_TO_SAVE_USER(1003, HttpStatus.BAD_REQUEST, "Failed to save user."),
-	FAILED_TO_DELETE_USER(1004, HttpStatus.NOT_FOUND, "user not found."),
+	FAILED_TO_DELETE_USER(1004, HttpStatus.NOT_FOUND, "User not found."),
 	USER_DELETED(1005, HttpStatus.OK, "User deleted sucessfully."),
-	INVALID_TOKEN(1006, HttpStatus.UNAUTHORIZED, "Invalid token."),
-	TOKEN_EXPIRED(1007, HttpStatus.BAD_REQUEST, "Token expired"),;
+	USER_SAVED(1006, HttpStatus.OK, "User saved sucessfully."),
+	INVALID_TOKEN(1007, HttpStatus.UNAUTHORIZED, "Invalid token."),
+	TOKEN_EXPIRED(1008, HttpStatus.BAD_REQUEST, "Token expired"),;
 
 	/** Begin of the error codes range. */
 	public static final int ERROR_CODE_RANGE_BASE = 1000;
