@@ -1,10 +1,10 @@
 server:
   port: 8082
   servlet:
-    context-path: /task-manager
+    context-path: /taskmanager
 spring:
   application:
-    name: user-service
+    name: task-manager-service
   datasource:
     username: root
     password: root
